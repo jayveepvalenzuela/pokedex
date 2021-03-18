@@ -10,4 +10,14 @@ async function getAllPokemon() {
   }
 }
 
-export { getAllPokemon };
+async function getPokemon(id) {
+  try {
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { getAllPokemon, getPokemon };
