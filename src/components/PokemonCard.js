@@ -8,7 +8,9 @@ function PokemonCard({ name, id }) {
   function showPokemonModal(id) {
     pokemonAPI.getPokemon(id).then(obj => {
       console.log(obj);
-      dispatch({ type: 'SET_MODAL', payload: true });
+      if (!state.modal) {
+        dispatch({ type: 'SET_MODAL', payload: true });
+      }
     });
   }
 
