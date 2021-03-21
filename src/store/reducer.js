@@ -5,6 +5,11 @@ function reducer(state, action) {
         ...state,
         modal: action.payload
       };
+    case 'SET_POKEMON_PROFILE':
+      return {
+        ...state,
+        pokemonProfile: action.payload
+      };
     default:
       return state;
   }

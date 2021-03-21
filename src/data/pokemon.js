@@ -20,4 +20,14 @@ async function getPokemon(id) {
   }
 }
 
-export { getAllPokemon, getPokemon };
+async function getPokemonSpecies(id) {
+  try {
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { getAllPokemon, getPokemon, getPokemonSpecies };

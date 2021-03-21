@@ -7,10 +7,15 @@ function PokemonCard({ name, id }) {
 
   function showPokemonModal(id) {
     pokemonAPI.getPokemon(id).then(obj => {
-      console.log(obj);
-      if (!state.modal) {
-        dispatch({ type: 'SET_MODAL', payload: true });
-      }
+      const pokemonData = obj.data;
+
+      pokemonAPI.getPokemonSpecies(id).then(obj => {
+        const pokemonSpecies = obj.data;
+
+        dispatch({ type: 'SET_POKEMON_PROFILE', payload: { ...pokemonData, ...pokemonSpecies } });
+      }).then(() => {
+        if (!state.modal) dispatch({ type: 'SET_MODAL', payload: true });
+      });
     });
   }
 

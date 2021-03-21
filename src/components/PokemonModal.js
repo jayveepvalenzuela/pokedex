@@ -3,9 +3,50 @@ import { Context } from '../store/store';
 
 function PokemonModal() {
   const [state, dispatch] = useContext(Context);
+  const pokemonData = state.pokemonProfile;
 
   function hide() {
     dispatch({ type: 'SET_MODAL', payload: false });
+  }
+
+  function Image() {
+    return <img className='w-3/4 mx-auto' src={`/pokemon/${pokemonData.id}.webp`} alt='' />;
+  }
+
+  function Name() {
+    return (
+      <h3 className='mb-3 text-xl md:text-3xl text-center lg:text-left font-bold capitalize'>
+        {pokemonData.name}
+        <span className='ml-4 text-gray-300'>{`#${pokemonData.id}`}</span>
+      </h3>
+    );
+  }
+
+  function Types() {
+    return (
+      <ul className='mb-3 text-center lg:text-left'>
+        {pokemonData.types.map((typeData, i) => {
+          return (
+            <li key={i} className={`inline rounded mr-2 px-2 py-1 bg-gray-500 text-white text-xs bg-${typeData.type.name}`}>
+              {typeData.type.name}
+            </li>
+          )
+        })}
+      </ul>
+    );
+  }
+
+  function Stats() {
+    return (
+      <div className='mb-2 text-center lg:text-left'>
+        <div className='inline-block mr-3'><strong>Height:</strong> {pokemonData.height}</div>
+        <div className='inline-block mr-3'><strong>Weight:</strong> {pokemonData.weight}</div>
+      </div>
+    );
+  }
+
+  function Description() {
+    return <p className='text-gray-500'>{pokemonData.flavor_text_entries[0].flavor_text}</p>;
   }
 
   return (
@@ -16,26 +57,23 @@ function PokemonModal() {
         <div className='flex justify-end p-6 bg-red-600 text-white'>
           <button type='button' onClick={hide}>✕</button>
         </div>
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 p-6'>
-          <div>
-            <img className='w-3/4 mx-auto' src={`/pokemon/1.webp`} alt='' />
-          </div>
-          <div className='col-span-2 text-gray-700'>
-            <h3 className='mb-3 text-xl md:text-3xl text-center lg:text-left font-bold capitalize'>
-              Bulbasaur
-              <span className='ml-4 text-gray-300'>#1</span>
-            </h3>
-            <ul className='mb-3 text-center lg:text-left'>
-              <li className='inline rounded mr-2 px-2 py-1 bg-gray-500 text-white text-xs'>grass</li>
-              <li className='inline rounded mr-2 px-2 py-1 bg-gray-500 text-white text-xs'>grass</li>
-            </ul>
-            <div className='mb-2 text-center lg:text-left'>
-              <div className='inline-block mr-3'><strong>Height:</strong> 0.7m</div>
-              <div className='inline-block mr-3'><strong>Weight:</strong> 6.9kg</div>
+        {Object.keys(pokemonData).length > 0 ? (
+          <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 p-6'>
+            <div>
+              <Image />
             </div>
-            <p className='text-gray-500'>For some time after its birth, it grows by gaining nourishment from the seed on its back.</p>
+            <div className='col-span-2 text-gray-700'>
+              <Name />
+              <Types />
+              <Stats />
+              <Description />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className='flex p-6 center text-gray-500'>
+            <p>Pokémon data not found</p>
+          </div>
+        )}
       </div>
     </div>
   );

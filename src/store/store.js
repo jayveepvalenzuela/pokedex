@@ -2,7 +2,8 @@ import { createContext, useReducer } from 'react';
 import Reducer from './reducer'
 
 const initialState = {
-  modal: false
+  modal: false,
+  pokemonProfile: {}
 };
 
 function Store({ children }) {
