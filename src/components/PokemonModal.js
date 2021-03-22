@@ -39,8 +39,8 @@ function PokemonModal() {
   function Stats() {
     return (
       <div className='mb-2 text-center lg:text-left'>
-        <div className='inline-block mr-3'><strong>Height:</strong> {pokemonData.height}</div>
-        <div className='inline-block mr-3'><strong>Weight:</strong> {pokemonData.weight}</div>
+        <div className='inline-block mr-3'><strong>Height:</strong> {pokemonData.height / 10}m</div>
+        <div className='inline-block mr-3'><strong>Weight:</strong> {pokemonData.weight / 10}kg</div>
       </div>
     );
   }
@@ -50,10 +50,8 @@ function PokemonModal() {
   }
 
   return (
-    <div className='flex fixed justify-center items-center inset-0 z-10 p-6 bg-white bg-opacity-75' style={{
-      display: state.modal ? 'flex' : 'none'
-    }}>
-      <div className='container h-full lg:h-2/3 rounded shadow-xl overflow-hidden bg-white'>
+    <div className={`flex fixed justify-center items-center inset-0 z-10 p-6 bg-white bg-opacity-75 transform-gpu transition duration-150 ${state.modal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none delay-300'}`}>
+      <div className={`container h-full lg:h-auto rounded shadow-xl overflow-hidden bg-white transform-gpu transition duration-300 ease-in-out ${state.modal ? 'scale-100 opacity-100 delay-150' : 'scale-95 opacity-0'}`}>
         <div className='flex justify-end p-6 bg-red-600 text-white'>
           <button type='button' onClick={hide}>✕</button>
         </div>
