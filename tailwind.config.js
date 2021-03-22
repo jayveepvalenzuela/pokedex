@@ -1,5 +1,32 @@
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  purge: {
+    content: [
+      './src/**/*.{js,jsx,ts,tsx}',
+      './public/index.html'
+    ],
+    options: {
+      safelist: [
+        'bg-normal',
+        'bg-fighting',
+        'bg-flying',
+        'bg-poison',
+        'bg-ground',
+        'bg-rock',
+        'bg-bug',
+        'bg-ghost',
+        'bg-steel',
+        'bg-fire',
+        'bg-water',
+        'bg-grass',
+        'bg-electric',
+        'bg-psychic',
+        'bg-ice',
+        'bg-dragon',
+        'bg-dark',
+        'bg-fairy'
+      ],
+    },
+  },
   darkMode: false,
   theme: {
     container: {
