@@ -12,7 +12,7 @@ function PokemonList() {
   }, []);
 
   return (
-    <div className='container mx-auto px-5'>
+    <div className='container mx-auto mb-8 px-5'>
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
         {pokemonList.map((pokemon, i) => <PokemonCard key={i} name={pokemon.name} id={i + 1} />)}
       </div>

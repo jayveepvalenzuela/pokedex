@@ -9,6 +9,23 @@ function PokemonModal() {
     dispatch({ type: 'SET_MODAL', payload: false });
   }
 
+  function shorten(statName) {
+    switch (statName) {
+      case 'attack':
+        return 'atk';
+      case 'defense':
+        return 'def';
+      case 'special-attack':
+        return 'sp. atk'
+      case 'special-defense':
+        return 'sp. def'
+      case 'speed':
+        return 'spd'
+      default:
+        return statName;
+    }
+  }
+
   function Image() {
     return <img className='w-3/4 mx-auto' src={`/pokemon/${pokemonData.id}.webp`} alt='' />;
   }
@@ -24,7 +41,7 @@ function PokemonModal() {
 
   function Types() {
     return (
-      <ul className='mb-3 text-center lg:text-left'>
+      <ul className='mb-2 text-center lg:text-left'>
         {pokemonData.types.map((typeData, i) => {
           return (
             <li key={i} className={`inline rounded mr-2 px-2 py-1 bg-gray-500 text-white text-xs bg-${typeData.type.name}`}>
@@ -45,8 +62,29 @@ function PokemonModal() {
     );
   }
 
+  function BaseStats() {
+    return (
+      <table className='table-fixed mx-auto mb-2 lg:mx-0' cellSpacing='2' cellPadding='2'>
+        <tbody>
+          <tr>
+            {pokemonData.stats.map((st, i) => {
+              return (
+                <td width='80' key={i}>
+                  <div className='rounded py-2 bg-gray-50 text-center border-solid border-2 border-gray-100'>
+                    <div>{st.base_stat}</div>
+                    <div className='text-xs font-bold whitespace-nowrap uppercase'>{shorten(st.stat.name)}</div>
+                  </div>
+                </td>
+              )
+            })}
+          </tr>
+        </tbody>
+      </table>
+    );
+  }
+
   function Description() {
-    return <p className='text-gray-500'>{pokemonData.flavor_text_entries[0].flavor_text}</p>;
+    return <p className='text-gray-500'>{pokemonData.flavor_text_entries.find(fte => fte.language.name === 'en').flavor_text}</p>;
   }
 
   return (
@@ -64,6 +102,7 @@ function PokemonModal() {
               <Name />
               <Types />
               <Stats />
+              <BaseStats />
               <Description />
             </div>
           </div>
