@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Context } from '../store/store';
+import { shorten, addPadding } from '../helpers';
 
 function PokemonModal() {
   const [state, dispatch] = useContext(Context);
@@ -7,23 +8,6 @@ function PokemonModal() {
 
   function hide() {
     dispatch({ type: 'SET_MODAL', payload: false });
-  }
-
-  function shorten(statName) {
-    switch (statName) {
-      case 'attack':
-        return 'atk';
-      case 'defense':
-        return 'def';
-      case 'special-attack':
-        return 'sp. atk'
-      case 'special-defense':
-        return 'sp. def'
-      case 'speed':
-        return 'spd'
-      default:
-        return statName;
-    }
   }
 
   function Image() {
@@ -34,7 +18,7 @@ function PokemonModal() {
     return (
       <h3 className='mb-3 text-xl md:text-3xl text-center lg:text-left font-bold capitalize'>
         {pokemonData.name}
-        <span className='ml-4 text-gray-300'>{`#${pokemonData.id}`}</span>
+        <span className='ml-4 text-gray-300'>{`#${addPadding(pokemonData.id)}`}</span>
       </h3>
     );
   }
