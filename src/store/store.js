@@ -2,8 +2,10 @@ import { createContext, useReducer } from 'react';
 import Reducer from './reducer'
 
 const initialState = {
+  pokemonList: [],
+  pokemonProfile: {},
   modal: false,
-  pokemonProfile: {}
+  searchResult: [],
 };
 
 function Store({ children }) {

@@ -1,33 +1,33 @@
 import axios from 'axios';
 
 async function getAllPokemon() {
-  try {
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151');
+  const allPokemon = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151').then(async response => {
+    const promises = response.data.results.map(result => {
+      return axios.get(result.url);
+    });
 
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+    const response_1 = await Promise.all(promises);
+    return response_1;
+  });
+
+  return allPokemon;
 }
 
-async function getPokemon(id) {
-  try {
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+async function getPokemonProfile(id) {
+  return Promise.all([
+    getPokemon(id),
+    getPokemonSpecies(id)
+  ]).then(results => {
+    return results
+  });
 }
 
-async function getPokemonSpecies(id) {
-  try {
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
-
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+function getPokemon(id) {
+  return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
 }
 
-export { getAllPokemon, getPokemon, getPokemonSpecies };
+function getPokemonSpecies(id) {
+  return axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+}
+
+export { getAllPokemon, getPokemonProfile };

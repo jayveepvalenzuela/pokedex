@@ -6,4 +6,12 @@
   .invert {
     filter: invert();
   }
+  .search::before {
+    content: '☌';
+    position: absolute;
+    bottom: 0.75rem;
+    color: #fff;
+    transform: rotate(110deg);
+    font-size: 2rem;
+  }
 }
