@@ -6,9 +6,7 @@ async function getAllPokemon() {
       return axios.get(result.url);
     });
 
-    const allPokemonData = await Promise.all(promises);
-
-    return allPokemonData;
+    return await Promise.all(promises);
   });
 
   return allPokemon;

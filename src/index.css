@@ -6,12 +6,8 @@
   .invert {
     filter: invert();
   }
-  .search::before {
-    content: '☌';
+  .search > svg {
     position: absolute;
-    bottom: 0.75rem;
-    color: #fff;
-    transform: rotate(110deg);
-    font-size: 2rem;
+    bottom: 1.75rem;
   }
 }

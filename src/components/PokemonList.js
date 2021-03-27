@@ -12,7 +12,6 @@ function PokemonList() {
     pokemonAPI.getAllPokemon().then(allPokemon => {
       dispatch({ type: 'SET_POKEMON_LIST', payload: allPokemon });
       dispatch({ type: 'SET_SEARCH_RESULT', payload: allPokemon });
-
       setLoadingList(false);
     });
   }, [dispatch]);
