@@ -24,9 +24,11 @@ function PokemonList() {
           <div className='w-1/4 mx-auto'>
             <Loader />
           </div> :
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-            {state.searchResult.map(pokemon => <PokemonCard key={pokemon.data.id} name={pokemon.data.name} id={pokemon.data.id} />)}
-          </div>
+          state.searchResult.length > 0 ?
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+              {state.searchResult.map(pokemon => <PokemonCard key={pokemon.data.id} name={pokemon.data.name} id={pokemon.data.id} />)}
+            </div> :
+            <p className='text-gray-500'>Pokémon not found</p>
       }
     </div>
   )

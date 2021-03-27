@@ -6,20 +6,23 @@ async function getAllPokemon() {
       return axios.get(result.url);
     });
 
-    const response_1 = await Promise.all(promises);
-    return response_1;
+    const allPokemonData = await Promise.all(promises);
+
+    return allPokemonData;
   });
 
   return allPokemon;
 }
 
 async function getPokemonProfile(id) {
-  return Promise.all([
+  const pokemonProfile = await Promise.all([
     getPokemon(id),
     getPokemonSpecies(id)
   ]).then(results => {
     return results
   });
+
+  return pokemonProfile;
 }
 
 function getPokemon(id) {
