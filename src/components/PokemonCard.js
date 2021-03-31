@@ -18,7 +18,7 @@ function PokemonCard({ name, id }) {
       dispatch({ type: 'SET_POKEMON_PROFILE', payload: { ...pokemonData, ...pokemonSpecies } });
       dispatch({ type: 'SET_MODAL', payload: true });
       setLoadingData(false);
-    });
+    }).catch(err => console.log(err));
   }
 
   return (

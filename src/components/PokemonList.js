@@ -13,7 +13,7 @@ function PokemonList() {
       dispatch({ type: 'SET_POKEMON_LIST', payload: allPokemon });
       dispatch({ type: 'SET_SEARCH_RESULT', payload: allPokemon });
       setLoadingList(false);
-    });
+    }).catch(err => console.log(err));
   }, [dispatch]);
 
   return (

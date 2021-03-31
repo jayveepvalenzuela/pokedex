@@ -12,7 +12,7 @@ async function getAllPokemon() {
 
     return allPokemon;
   } catch (err) {
-    console.error(err);
+    return err;
   }
 }
 
@@ -25,7 +25,7 @@ async function getPokemonProfile(id) {
 
     return pokemonProfile;
   } catch (err) {
-    console.error(err);
+    return err;
   }
 }
 
