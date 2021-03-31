@@ -1,26 +1,32 @@
 import axios from 'axios';
 
 async function getAllPokemon() {
-  const allPokemon = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151').then(async response => {
-    const promises = response.data.results.map(result => {
-      return axios.get(result.url);
+  try {
+    const allPokemon = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151').then(response => {
+      const promises = response.data.results.map(result => {
+        return axios.get(result.url);
+      });
+
+      return Promise.all(promises);
     });
 
-    return await Promise.all(promises);
-  });
-
-  return allPokemon;
+    return allPokemon;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 async function getPokemonProfile(id) {
-  const pokemonProfile = await Promise.all([
-    getPokemon(id),
-    getPokemonSpecies(id)
-  ]).then(results => {
-    return results
-  });
+  try {
+    const pokemonProfile = await Promise.all([
+      getPokemon(id),
+      getPokemonSpecies(id)
+    ]).then(results => results);
 
-  return pokemonProfile;
+    return pokemonProfile;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 function getPokemon(id) {
