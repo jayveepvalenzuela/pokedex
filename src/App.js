@@ -7,15 +7,13 @@ import Store from './store/store';
 
 function App() {
   return (
-    <main>
-      <Store>
-        <Header />
-        <Banner />
-        <PokemonList />
-        <Footer />
-        <PokemonModal />
-      </Store>
-    </main>
+    <Store>
+      <Header />
+      <Banner />
+      <PokemonList />
+      <Footer />
+      <PokemonModal />
+    </Store>
   );
 }
 
