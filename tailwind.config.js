@@ -54,6 +54,22 @@ module.exports = {
         'dragon': '#7038f8',
         'dark': '#705848',
         'fairy': '#ee99ac',
+      },
+      animation: {
+        'smoke-l': 'smokeLeft 20s ease-in-out infinite',
+        'smoke-r': 'smokeRight 18s ease-in-out infinite',
+      },
+      keyframes: {
+        smokeLeft: {
+          '0%': { left: '-220px' },
+          '50%': { left: '-300px' },
+          '100%': { left: '-220px' },
+        },
+        smokeRight: {
+          '0%': { right: '-165px' },
+          '50%': { right: '-240px' },
+          '100%': { right: '-165px' },
+        },
       }
     },
   },
