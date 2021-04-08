@@ -72,29 +72,29 @@ function PokemonModal() {
   }
 
   return (
-    <div className={`flex fixed justify-center items-center inset-0 z-10 p-6 bg-white bg-opacity-75 transform-gpu transition duration-150 ${state.modal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none delay-300'}`}>
-      <div className={`container h-full lg:h-auto rounded shadow-xl overflow-hidden bg-white transform-gpu transition duration-300 ease-in-out ${state.modal ? 'scale-100 opacity-100 delay-150' : 'scale-95 opacity-0'}`}>
+    <div className={`${state.modal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none delay-300'} flex fixed justify-center items-center inset-0 z-10 p-6 bg-white bg-opacity-75 transform-gpu transition duration-150`}>
+      <div className={`${state.modal ? 'scale-100 opacity-100 delay-150' : 'scale-95 opacity-0'} container h-full lg:h-auto rounded shadow-xl overflow-hidden bg-white transform-gpu transition duration-300 ease-in-out`}>
         <div className='flex justify-end p-6 bg-red-600 text-white'>
           <button type='button' onClick={hide}>✕</button>
         </div>
-        {Object.keys(pokemonData).length > 0 ? (
-          <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 p-6'>
-            <div>
-              <Image />
+        {
+          Object.keys(pokemonData).length > 0 ?
+            <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 p-6'>
+              <div>
+                <Image />
+              </div>
+              <div className='col-span-2 text-gray-700'>
+                <Name />
+                <Types />
+                <Stats />
+                <BaseStats />
+                <Description />
+              </div>
+            </div> :
+            <div className='flex p-6 center text-gray-500'>
+              <p>Pokémon data not found</p>
             </div>
-            <div className='col-span-2 text-gray-700'>
-              <Name />
-              <Types />
-              <Stats />
-              <BaseStats />
-              <Description />
-            </div>
-          </div>
-        ) : (
-          <div className='flex p-6 center text-gray-500'>
-            <p>Pokémon data not found</p>
-          </div>
-        )}
+        }
       </div>
     </div>
   );
