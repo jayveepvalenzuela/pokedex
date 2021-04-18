@@ -1,4 +1,4 @@
-function reducer(state, action) {
+export default function reducer(state, action) {
   switch (action.type) {
     case 'SET_POKEMON_LIST':
       return {
@@ -24,5 +24,3 @@ function reducer(state, action) {
       return state;
   }
 };
-
-export default reducer;

@@ -8,7 +8,7 @@ const initialState = {
   searchResult: [],
 };
 
-function Store({ children }) {
+export default function Store({ children }) {
   const [state, dispatch] = useReducer(Reducer, initialState);
 
   return (
@@ -19,4 +19,3 @@ function Store({ children }) {
 };
 
 export const Context = createContext(initialState);
-export default Store;

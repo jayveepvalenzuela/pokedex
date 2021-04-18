@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import PokemonModal from './components/PokemonModal';
 import Store from './store/store';
 
-function App() {
+export default function App() {
   return (
     <Store>
       <Header />
@@ -16,5 +16,3 @@ function App() {
     </Store>
   );
 }
-
-export default App;
