@@ -19,22 +19,14 @@ async function getAllPokemon() {
 async function getPokemonProfile(id) {
   try {
     const pokemonProfile = await Promise.all([
-      getPokemon(id),
-      getPokemonSpecies(id)
+      axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`),
+      axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
     ]).then(results => results);
 
     return pokemonProfile;
   } catch (err) {
     throw new Error(err);
   }
-}
-
-function getPokemon(id) {
-  return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-}
-
-function getPokemonSpecies(id) {
-  return axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
 }
 
 export { getAllPokemon, getPokemonProfile };
