@@ -1,18 +1,19 @@
 import { useContext } from 'react';
 import { Context } from '../store/store';
-import { shorten, addPadding } from '../helpers';
+import { shorten } from '../helpers';
+import PokemonThumbnail from './PokemonThumbnail';
+import PokemonId from './PokemonId';
+import EmptyMessage from './EmptyMessage';
 
 export default function PokemonModal() {
   const [state, dispatch] = useContext(Context);
   const pokemonData = state.pokemonProfile;
 
-  const Image = () => <img className="w-3/4 mx-auto" src={`/pokemon/${pokemonData.id}.webp`} alt="" />;
-
   const Name = () => {
     return (
       <h3 className="mb-3 text-xl md:text-3xl text-center lg:text-left font-bold capitalize">
         {pokemonData.name}
-        <span className="ml-4 text-gray-300">{`#${addPadding(pokemonData.id)}`}</span>
+        <PokemonId classes="inline-block ml-4 text-gray-300" id={pokemonData.id} />
       </h3>
     );
   }
@@ -73,11 +74,10 @@ export default function PokemonModal() {
         <div className="flex justify-end p-6 bg-red-600 text-white">
           <button type="button" onClick={hideModal}>✕</button>
         </div>
-        {
-          Object.keys(pokemonData).length > 0 ?
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
+        {Object.keys(pokemonData).length > 0
+          ? <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
               <div>
-                <Image />
+                <PokemonThumbnail classes="w-3/4 mx-auto" imgPath={`/pokemon/${pokemonData.id}.webp`} />
               </div>
               <div className="col-span-2 text-gray-700">
                 <Name />
@@ -86,9 +86,9 @@ export default function PokemonModal() {
                 <BaseStats />
                 <Description />
               </div>
-            </div> :
-            <div className="flex p-6 center text-gray-500">
-              <p>Pokémon data not found</p>
+            </div>
+          : <div className="flex p-6 center">
+              <EmptyMessage classes="text-gray-500" message="Pokémon data not found" />
             </div>
         }
       </div>

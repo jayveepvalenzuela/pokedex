@@ -1,8 +1,9 @@
 import { useContext, useState } from 'react';
 import { Context } from '../store/store';
 import * as pokemonAPI from '../data/pokemon';
-import { addPadding } from '../helpers';
 import Loader from './Loader';
+import PokemonThumbnail from './PokemonThumbnail';
+import PokemonId from './PokemonId';
 
 export default function PokemonCard({ name, id }) {
   const [state, dispatch] = useContext(Context);
@@ -25,11 +26,11 @@ export default function PokemonCard({ name, id }) {
     <div
       className="relative transform-gpu shadow rounded p-6 text-center cursor-pointer transition duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:bg-gray-50"
       onClick={() => showPokemonModal(id)}>
-      <div className="absolute top-3 right-6 text-gray-300 font-bold">{`#${addPadding(id)}`}</div>
+        <PokemonId classes="absolute top-3 right-6 text-gray-300 font-bold" id={id} />
       {
         loadingData ?
           <Loader /> :
-          <img className="w-3/4 mx-auto" src={`/pokemon/${id}.webp`} alt="" />
+          <PokemonThumbnail classes="w-3/4 mx-auto" imgPath={`/pokemon/${id}.webp`} />
       }
       <h2 className="text-xl font-bold capitalize text-gray-700">{name}</h2>
     </div>
