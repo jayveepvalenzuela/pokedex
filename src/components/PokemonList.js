@@ -28,7 +28,7 @@ export default function PokemonList() {
           ? <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {pokemonList.map(pokemon => <PokemonCard key={pokemon.data.id} name={pokemon.data.name} id={pokemon.data.id} />)}
             </div>
-          : <EmptyMessage classes="text-gray-500" message="Pokémon not found" />
+          : <EmptyMessage classes="text-gray-500 text-center" message="Pokémon not found" />
       }
     </div>
   )

@@ -90,6 +90,8 @@ export default function PokemonModal() {
           : <div className="flex p-6 center">
               <EmptyMessage classes="text-gray-500" message="Pokémon data not found" />
             </div>
+          : <div className="flex p-6 justify-center">
+            <EmptyMessage classes="text-gray-500" message="Pokémon data not found" />
         }
       </div>
     </div>
