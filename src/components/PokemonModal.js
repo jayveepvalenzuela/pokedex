@@ -5,24 +5,33 @@ import PokemonThumbnail from './PokemonThumbnail';
 import PokemonId from './PokemonId';
 import EmptyMessage from './EmptyMessage';
 import InGameCry from './InGameCry';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default function PokemonModal() {
   const [state, dispatch] = useContext(Context);
-  const pokemonData = state.pokemonProfile;
+  const {
+    id,
+    name,
+    types,
+    height,
+    weight,
+    stats,
+    flavor_text_entries
+  } = state.pokemonProfile;
 
   const Name = () => {
     return (
-      <h3 className="mb-3 text-xl md:text-3xl text-center lg:text-left font-bold capitalize">
-        {pokemonData.name}
-        <PokemonId classes="inline-block ml-4 text-gray-300" id={pokemonData.id} />
-      </h3>
+      <div className="inline-block text-xl md:text-3xl text-center lg:text-left font-bold capitalize">
+        {name}
+      </div>
     );
   }
 
   const Types = () => {
     return (
       <ul className="mb-2 text-center lg:text-left">
-        {pokemonData.types.map((typeData, i) => {
+        {types.map((typeData, i) => {
           return (
             <li key={i} className={`inline rounded mr-2 px-2 py-1 bg-gray-500 text-white text-xs bg-${typeData.type.name}`}>
               {typeData.type.name}
@@ -36,8 +45,8 @@ export default function PokemonModal() {
   const Stats = () => {
     return (
       <div className="mb-2 text-center lg:text-left">
-        <div className="inline-block mr-3"><strong>Height:</strong> {pokemonData.height / 10}m</div>
-        <div className="inline-block mr-3"><strong>Weight:</strong> {pokemonData.weight / 10}kg</div>
+        <div className="inline-block mr-3"><strong>Height:</strong> {height / 10}m</div>
+        <div className="inline-block mr-3"><strong>Weight:</strong> {weight / 10}kg</div>
       </div>
     );
   }
@@ -47,7 +56,7 @@ export default function PokemonModal() {
       <table className="table-fixed mx-auto mb-2 lg:mx-0" cellSpacing="2" cellPadding="2">
         <tbody>
           <tr>
-            {pokemonData.stats.map((st, i) => {
+            {stats.map((st, i) => {
               return (
                 <td width="80" key={i}>
                   <div className="rounded py-2 bg-gray-50 text-center border-solid border-2 border-gray-100">
@@ -63,7 +72,7 @@ export default function PokemonModal() {
     );
   }
 
-  const Description = () => <p className="text-gray-500">{pokemonData.flavor_text_entries.find(fte => fte.language.name === 'en').flavor_text}</p>;
+  const Description = () => <p className="text-gray-500">{flavor_text_entries.find(fte => fte.language.name === 'en').flavor_text}</p>;
 
   function hideModal() {
     dispatch({ type: 'SET_MODAL', payload: false });
@@ -72,28 +81,31 @@ export default function PokemonModal() {
   return (
     <div className={`${state.modal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none delay-300'} flex fixed justify-center items-center inset-0 z-10 p-6 bg-white bg-opacity-75 transform-gpu transition duration-150`}>
       <div className={`${state.modal ? 'scale-100 opacity-100 delay-150' : 'scale-95 opacity-0'} container h-full lg:h-auto rounded shadow-xl overflow-hidden bg-white transform-gpu transition duration-300 ease-in-out`}>
-        <div className="flex justify-end p-6 bg-red-600 text-white">
-          <button type="button" onClick={hideModal}>✕</button>
+        <div className="flex justify-between p-6 bg-red-600 text-white">
+          <PokemonId classes="font-bold" id={id} />
+          <button type="button" className="focus:outline-none" onClick={hideModal}>
+            <FontAwesomeIcon icon={faTimes} />
+          </button>
         </div>
-        {Object.keys(pokemonData).length > 0
+        {Object.keys(state.pokemonProfile).length > 0
           ? <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
-              <div>
-                <PokemonThumbnail classes="w-3/4 mx-auto" imgPath={`/pokemon/${pokemonData.id}.webp`} />
-              </div>
-              <div className="col-span-2 text-gray-700">
+            <div>
+              <PokemonThumbnail classes="w-3/4 mx-auto" imgPath={`/pokemon/${id}.webp`} />
+            </div>
+            <div className="col-span-2 text-gray-700">
+              <div className="flex justify-center md:justify-start mb-3">
                 <Name />
-                <Types />
-                <Stats />
-                <BaseStats />
-                <Description />
                 <InGameCry id={id} />
               </div>
+              <Types />
+              <Stats />
+              <BaseStats />
+              <Description />
             </div>
-          : <div className="flex p-6 center">
-              <EmptyMessage classes="text-gray-500" message="Pokémon data not found" />
-            </div>
+          </div>
           : <div className="flex p-6 justify-center">
             <EmptyMessage classes="text-gray-500" message="Pokémon data not found" />
+          </div>
         }
       </div>
     </div>

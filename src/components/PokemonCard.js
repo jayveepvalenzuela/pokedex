@@ -25,12 +25,12 @@ export default function PokemonCard({ name, id }) {
   return (
     <div
       className="relative transform-gpu shadow rounded p-6 text-center cursor-pointer transition duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:bg-gray-50"
-      onClick={() => showPokemonModal(id)}>
-        <PokemonId classes="absolute top-3 right-6 text-gray-300 font-bold" id={id} />
-      {
-        loadingData ?
-          <Loader /> :
-          <PokemonThumbnail classes="w-3/4 mx-auto" imgPath={`/pokemon/${id}.webp`} />
+      onClick={() => showPokemonModal(id)}
+    >
+      <PokemonId classes="absolute top-3 right-6 text-gray-300 font-bold" id={id} />
+      {loadingData
+        ? <Loader />
+        : <PokemonThumbnail classes="w-3/4 mx-auto" imgPath={`/pokemon/${id}.webp`} />
       }
       <h2 className="text-xl font-bold capitalize text-gray-700">{name}</h2>
     </div>

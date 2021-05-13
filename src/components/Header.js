@@ -1,5 +1,5 @@
 import SearchBar from './SearchBar';
-import logo from '../media/logo.webp';
+import logo from '../assets/logo.webp';
 
 export default function Header() {
   return (
