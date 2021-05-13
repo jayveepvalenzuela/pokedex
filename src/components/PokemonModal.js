@@ -4,6 +4,7 @@ import { shorten } from '../helpers';
 import PokemonThumbnail from './PokemonThumbnail';
 import PokemonId from './PokemonId';
 import EmptyMessage from './EmptyMessage';
+import InGameCry from './InGameCry';
 
 export default function PokemonModal() {
   const [state, dispatch] = useContext(Context);
@@ -85,6 +86,7 @@ export default function PokemonModal() {
                 <Stats />
                 <BaseStats />
                 <Description />
+                <InGameCry id={id} />
               </div>
             </div>
           : <div className="flex p-6 center">
