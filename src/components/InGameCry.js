@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons';
-import { Howl } from 'howler';
+import { Howl, Howler } from 'howler';
+
+Howler.autoSuspend = false;
 
 export default function InGameCry({ id }) {
   const [playing, setPlaying] = useState(false);
