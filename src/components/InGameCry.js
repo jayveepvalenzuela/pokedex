@@ -4,6 +4,7 @@ import { faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons';
 import { Howl, Howler } from 'howler';
 
 Howler.autoSuspend = false;
+Howler.volume(0.5);
 
 export default function InGameCry({ id }) {
   const [playing, setPlaying] = useState(false);

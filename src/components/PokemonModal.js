@@ -5,8 +5,9 @@ import PokemonThumbnail from './PokemonThumbnail';
 import PokemonId from './PokemonId';
 import EmptyMessage from './EmptyMessage';
 import InGameCry from './InGameCry';
+import PokemonName from './PokemonName';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faAdjust } from '@fortawesome/free-solid-svg-icons';
 
 export default function PokemonModal() {
   const [state, dispatch] = useContext(Context);
@@ -19,14 +20,6 @@ export default function PokemonModal() {
     stats,
     flavor_text_entries
   } = state.pokemonProfile;
-
-  const Name = () => {
-    return (
-      <div className="inline-block text-xl md:text-3xl text-center lg:text-left font-bold capitalize">
-        {name}
-      </div>
-    );
-  }
 
   const Types = () => {
     return (
@@ -72,40 +65,46 @@ export default function PokemonModal() {
     );
   }
 
-  const Description = () => <p className="text-gray-500">{flavor_text_entries.find(fte => fte.language.name === 'en').flavor_text}</p>;
+  const Description = () => <p className="text-gray-500">{flavor_text_entries.find(fte => fte.version.name === 'yellow').flavor_text}</p>;
 
   function hideModal() {
     dispatch({ type: 'SET_MODAL', payload: false });
   }
 
+  const modalBackdrop = state.modal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none delay-300';
+  const modalContainer = state.modal ? 'scale-100 opacity-100 delay-150' : 'scale-95 opacity-0';
+
   return (
-    <div className={`${state.modal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none delay-300'} flex fixed justify-center items-center inset-0 z-10 p-6 bg-white bg-opacity-75 transform-gpu transition duration-150`}>
-      <div className={`${state.modal ? 'scale-100 opacity-100 delay-150' : 'scale-95 opacity-0'} container h-full lg:h-auto rounded shadow-xl overflow-hidden bg-white transform-gpu transition duration-300 ease-in-out`}>
+    <div className={`${modalBackdrop} flex fixed justify-center items-center inset-0 z-10 p-6 bg-white bg-opacity-75 transform-gpu transition duration-150`}>
+      <div className={`${modalContainer} container h-full lg:h-auto rounded shadow-xl overflow-hidden bg-white transform-gpu transition duration-300 ease-in-out`}>
         <div className="flex justify-between p-6 bg-red-600 text-white">
-          <PokemonId classes="font-bold" id={id} />
+          <div className="flex items-center">
+            <FontAwesomeIcon icon={faAdjust} className="transform -rotate-90 mr-2" />
+            <PokemonId classes="font-bold text-lg" id={id} />
+          </div>
           <button type="button" className="focus:outline-none" onClick={hideModal}>
             <FontAwesomeIcon icon={faTimes} />
           </button>
         </div>
         {Object.keys(state.pokemonProfile).length > 0
           ? <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
-            <div>
-              <PokemonThumbnail classes="w-3/4 mx-auto" imgPath={`/pokemon/${id}.webp`} />
-            </div>
-            <div className="col-span-2 text-gray-700">
-              <div className="flex justify-center md:justify-start mb-3">
-                <Name />
-                <InGameCry id={id} />
+              <div>
+                <PokemonThumbnail classes="w-3/4 mx-auto" imgPath={`/pokemon/${id}.webp`} />
               </div>
-              <Types />
-              <Stats />
-              <BaseStats />
-              <Description />
+              <div className="col-span-2 text-gray-700">
+                <div className="flex justify-center md:justify-start mb-3">
+                  <PokemonName element="h3" name={name} classes="inline-block text-xl md:text-3xl font-bold capitalize" />
+                  <InGameCry id={id} />
+                </div>
+                <Types />
+                <Stats />
+                <BaseStats />
+                <Description />
+              </div>
             </div>
-          </div>
           : <div className="flex p-6 justify-center">
-            <EmptyMessage classes="text-gray-500" message="Pokémon data not found" />
-          </div>
+              <EmptyMessage classes="text-gray-500" message="Pokémon data not found" />
+            </div>
         }
       </div>
     </div>

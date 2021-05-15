@@ -4,6 +4,7 @@ import * as pokemonAPI from '../data/pokemon';
 import Loader from './Loader';
 import PokemonThumbnail from './PokemonThumbnail';
 import PokemonId from './PokemonId';
+import PokemonName from './PokemonName';
 
 export default function PokemonCard({ name, id }) {
   const [state, dispatch] = useContext(Context);
@@ -32,7 +33,7 @@ export default function PokemonCard({ name, id }) {
         ? <Loader />
         : <PokemonThumbnail classes="w-3/4 mx-auto" imgPath={`/pokemon/${id}.webp`} />
       }
-      <h2 className="text-xl font-bold capitalize text-gray-700">{name}</h2>
+      <PokemonName element="h2" name={name} classes="text-xl font-bold capitalize text-gray-700" />
     </div>
   );
 }
