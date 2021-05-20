@@ -31,7 +31,7 @@ export default function PokemonCard({ name, id }) {
       <PokemonId classes="absolute top-3 right-6 text-gray-300 font-bold" id={id} />
       {loadingData
         ? <Loader />
-        : <PokemonThumbnail classes="w-3/4 mx-auto" imgPath={`/pokemon/${id}.webp`} />
+        : <PokemonThumbnail classes="w-3/4 mx-auto" id={id} />
       }
       <PokemonName element="h2" name={name} classes="text-xl font-bold capitalize text-gray-700" />
     </div>

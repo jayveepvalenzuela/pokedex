@@ -1,3 +1,3 @@
-export default function PokemonThumbnail({ classes = '', imgPath, alt = '' }) {
-  return <img className={classes} src={imgPath} alt={alt} />;
+export default function PokemonThumbnail({ classes = '', id, alt = '' }) {
+  return <img className={classes} src={require(`../assets/images/${id}.webp`).default} alt={alt} />;
 }

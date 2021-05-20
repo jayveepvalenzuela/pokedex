@@ -10,10 +10,11 @@ export default function InGameCry({ id }) {
   const [playing, setPlaying] = useState(false);
 
   function playPokemonCry(id) {
-    setPlaying(true);
-
     const sound = new Howl({
-      src: `cries/${id}.ogg`,
+      src: require(`../assets/cries/${id}.ogg`).default,
+      onload: () => {
+        setPlaying(true);
+      },
       onend: () => {
         setPlaying(false);
       }

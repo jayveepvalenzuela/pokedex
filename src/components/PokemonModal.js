@@ -89,7 +89,7 @@ export default function PokemonModal() {
         {Object.keys(state.pokemonProfile).length > 0
           ? <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
               <div>
-                <PokemonThumbnail classes="w-3/4 mx-auto" imgPath={`/pokemon/${id}.webp`} />
+                <PokemonThumbnail classes="w-3/4 mx-auto" id={id} />
               </div>
               <div className="col-span-2 text-gray-700">
                 <div className="flex justify-center md:justify-start mb-3">
