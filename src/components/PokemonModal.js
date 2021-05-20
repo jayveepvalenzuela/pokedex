@@ -6,6 +6,7 @@ import PokemonId from './PokemonId';
 import EmptyMessage from './EmptyMessage';
 import InGameCry from './InGameCry';
 import PokemonName from './PokemonName';
+import PokemonTypes from './PokemonTypes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faAdjust } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,22 +19,9 @@ export default function PokemonModal() {
     height,
     weight,
     stats,
-    flavor_text_entries
+    flavor_text_entries,
+    color
   } = state.pokemonProfile;
-
-  const Types = () => {
-    return (
-      <ul className="mb-2 text-center lg:text-left">
-        {types.map((typeData, i) => {
-          return (
-            <li key={i} className={`inline rounded mr-2 px-2 py-1 bg-gray-500 text-white text-xs bg-${typeData.type.name}`}>
-              {typeData.type.name}
-            </li>
-          )
-        })}
-      </ul>
-    );
-  }
 
   const Stats = () => {
     return (
@@ -90,13 +78,14 @@ export default function PokemonModal() {
           ? <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
               <div>
                 <PokemonThumbnail classes="w-3/4 mx-auto" id={id} />
+                <div className="absolute" style={{backgroundColor: 'rgba(0,0,0,.1)', top: '72%', left: '15%', width: '70%', height: '20%', borderRadius: '50%', filter: 'blur(5px)' }}></div>
               </div>
               <div className="col-span-2 text-gray-700">
                 <div className="flex justify-center md:justify-start mb-3">
                   <PokemonName element="h3" name={name} classes="inline-block text-xl md:text-3xl font-bold capitalize" />
                   <InGameCry id={id} />
                 </div>
-                <Types />
+                <PokemonTypes types={types} classes="mb-2 text-center lg:text-left" />
                 <Stats />
                 <BaseStats />
                 <Description />

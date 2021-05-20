@@ -14,6 +14,7 @@ export default function PokemonList() {
     pokemonAPI.getAllPokemon().then(allPokemon => {
       dispatch({ type: 'SET_POKEMON_LIST', payload: allPokemon });
       dispatch({ type: 'SET_SEARCH_RESULT', payload: allPokemon });
+
       setLoadingList(false);
     }).catch(err => console.log(err));
   }, [dispatch]);
@@ -26,7 +27,7 @@ export default function PokemonList() {
           </div>
         : pokemonList.length > 0
           ? <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {pokemonList.map(pokemon => <PokemonCard key={pokemon.data.id} name={pokemon.data.name} id={pokemon.data.id} />)}
+              {pokemonList.map(pokemon => <PokemonCard key={pokemon.data.id} data={pokemon.data} />)}
             </div>
           : <EmptyMessage classes="text-gray-500 text-center" message="Pokémon not found" />
       }
