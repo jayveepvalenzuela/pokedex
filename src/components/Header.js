@@ -8,7 +8,9 @@ export default function Header() {
         <a href="/">
           <img className="inline w-6" src={logo} alt="Logo" />
         </a>
-        <SearchBar />
+        <div className="w-40 lg:w-60">
+          <SearchBar />
+        </div>
       </div>
     </header>
   );

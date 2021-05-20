@@ -14,8 +14,8 @@ export default function SearchBar() {
   }
 
   return (
-    <form className="search w-40 lg:w-60">
-      <FontAwesomeIcon icon={faSearch} className="text-white" />
+    <form className="search relative">
+      <FontAwesomeIcon icon={faSearch} className="absolute bottom-2 text-white" />
       <input
         className="w-full border-b py-1 pl-6 bg-transparent text-white focus:outline-none placeholder-white"
         type="search"

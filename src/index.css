@@ -6,8 +6,4 @@
   .invert {
     filter: invert();
   }
-  .search > svg {
-    position: absolute;
-    bottom: 1.75rem;
-  }
 }
