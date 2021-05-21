@@ -77,7 +77,7 @@ export default function PokemonModal() {
         {Object.keys(state.pokemonProfile).length > 0
           ? <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
               <div className="relative">
-                <PokemonThumbnail classes="w-3/4 mx-auto" id={id} />
+                <PokemonThumbnail classes="w-3/4 mx-auto z-10 relative" id={id} />
                 <div className="absolute" style={{backgroundColor: 'rgba(0,0,0,.1)', top: '72%', left: '15%', width: '70%', height: '20%', borderRadius: '50%', filter: 'blur(5px)' }}></div>
               </div>
               <div className="col-span-2 text-gray-700">
