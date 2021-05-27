@@ -11,12 +11,15 @@ export default function PokemonList() {
   const pokemonList = state.searchResult;
 
   useEffect(() => {
-    pokemonAPI.getAllPokemon().then(allPokemon => {
-      dispatch({ type: 'SET_POKEMON_LIST', payload: allPokemon });
-      dispatch({ type: 'SET_SEARCH_RESULT', payload: allPokemon });
-
-      setLoadingList(false);
-    }).catch(err => console.log(err));
+    pokemonAPI.getAllPokemon()
+      .then(allPokemon => {
+        dispatch({ type: 'SET_POKEMON_LIST', payload: allPokemon });
+        dispatch({ type: 'SET_SEARCH_RESULT', payload: allPokemon });
+      })
+      .catch(err => console.log(err))
+      .finally(() => {
+        setLoadingList(false);
+      });
   }, [dispatch]);
 
   return (

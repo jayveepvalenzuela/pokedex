@@ -19,8 +19,7 @@ export default function PokemonModal() {
     height,
     weight,
     stats,
-    flavor_text_entries,
-    color
+    flavor_text_entries
   } = state.pokemonProfile;
 
   const Stats = () => {
@@ -60,7 +59,16 @@ export default function PokemonModal() {
   }
 
   const modalBackdrop = state.modal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none delay-300';
-  const modalContainer = state.modal ? 'scale-100 opacity-100 delay-150' : 'scale-95 opacity-0';
+  const modalContainer = state.modal ? 'translate-y-0 opacity-100 delay-150' : 'translate-y-6 opacity-0';
+  const shadow = {
+    backgroundColor: 'rgba(0,0,0,.1)',
+    top: '72%',
+    left: '15%',
+    width: '70%',
+    height: '20%',
+    borderRadius: '50%',
+    filter: 'blur(5px)'
+  };
 
   return (
     <div className={`${modalBackdrop} flex fixed justify-center items-center inset-0 z-10 p-6 bg-white bg-opacity-75 transform-gpu transition duration-150`}>
@@ -78,7 +86,7 @@ export default function PokemonModal() {
           ? <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
               <div className="relative">
                 <PokemonThumbnail classes="w-3/4 mx-auto z-10 relative" id={id} />
-                <div className="absolute" style={{backgroundColor: 'rgba(0,0,0,.1)', top: '72%', left: '15%', width: '70%', height: '20%', borderRadius: '50%', filter: 'blur(5px)' }}></div>
+                <div className="absolute" style={shadow}></div>
               </div>
               <div className="col-span-2 text-gray-700">
                 <div className="flex justify-center md:justify-start mb-3">
