@@ -11,7 +11,7 @@ export default function InGameCry({ id }) {
 
   function playPokemonCry(id) {
     const sound = new Howl({
-      src: require(`../assets/cries/${id}.ogg`).default,
+      src: require(`../assets/cries/${id}.ogg`),
       onload: () => {
         setPlaying(true);
       },
