@@ -1,6 +1,6 @@
 # Pokédex React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) ![Deprecated](https://img.shields.io/badge/deprecated-red).
 
 ## Available Scripts
 
